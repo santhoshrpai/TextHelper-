@@ -6,6 +6,9 @@
 <head runat="server">
     <title>EZReader</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="BootstrapFolder/Scripts/jquery-1.9.1.js"></script>
+    <script src="BootstrapFolder/Scripts/bootstrap.js"></script>
+    <link href="BootstrapFolder/Bootstrap/bootstrap.css" rel="stylesheet" />
     <script>
     $(function () {
         $(document.body).bind('mouseup', function (e) {
@@ -23,6 +26,12 @@
     </script>
 </head>
 <body style="font-family:Tahoma;text-align:center">
+        <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2 class="panel-title lg">Oliver Twist</h2>
+  </div>
+  <div class="jumbotron">
+  <div class="panel-body">
     <form id="form1" runat="server">
     <div>    
         <asp:FileUpload ID="FileUpload1" runat="server" />
@@ -36,19 +45,21 @@
     <div id="result" runat="server" style="text-align:left;border-color:black;border-style:outset;border-width:thin;height:680px;vertical-align:central;visibility:hidden">
     </div> <br />
     <asp:Panel runat="server" ID="pnlShowPage" Visible="false" HorizontalAlign="Center">
-    <asp:Button ID="btnFirst" runat="server" Text="<<- First" OnClick="btnFirst_Click" /> &nbsp;
-    <asp:Button ID="btnPrev" runat="server" Text="<- Prev" OnClick="btnPrev_Click" /> &nbsp;
+    <asp:Button ID="btnFirst"  class="btn btn-primary" runat="server" Text="<<- First" OnClick="btnFirst_Click" /> &nbsp;
+    <asp:Button ID="btnPrev"  class="btn btn-primary" runat="server" Text="<- Prev" OnClick="btnPrev_Click" /> &nbsp;
     <asp:Label ID="lblShow" runat="server" Text="Showing page "></asp:Label>
     <asp:Label ID="lblCurrentPage" runat="server" Text=""></asp:Label>
     <asp:Label ID="lblOf" runat="server" Text=" of "></asp:Label>
     <asp:Label ID="lblTotalPages" runat="server" Text=""></asp:Label> &nbsp;
-    <asp:Button ID="btnNext" runat="server" Text="Next ->" OnClick="btnNext_Click" /> &nbsp;
-    <asp:Button ID="btnLast" runat="server" Text="Last -->" OnClick="btnLast_Click" />
+    <asp:Button ID="btnNext"  class="btn btn-primary" runat="server" Text="Next ->" OnClick="btnNext_Click" /> &nbsp;
+    <asp:Button ID="btnLast"  class="btn btn-primary" runat="server" Text="Last -->" OnClick="btnLast_Click" />
     </asp:Panel>
     
     </td>
     </tr>
     </table>
         </form>
+      </div>
+      </div>
 </body>
 </html>
