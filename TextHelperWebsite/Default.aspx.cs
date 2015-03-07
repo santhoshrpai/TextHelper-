@@ -29,12 +29,15 @@ public partial class _Default : System.Web.UI.Page
         if (this.FileUpload1.HasFile)
         {
             PdfReader reader1 = (PdfReader)Session["document"];
+            if(reader1!=null)
+            reader1.Close();
             string fileName = Server.MapPath(FileUpload1.FileName);
             if (File.Exists(fileName))
             {
                 File.Delete(fileName);
             }
             FileUpload1.SaveAs(fileName);
+           
             string text = ExtractTextFromPdf(fileName);
             reader = new PdfReader(fileName);
             //Session["file"] = fileName;
