@@ -26,26 +26,14 @@
     </script>
 </head>
 <body style="font-family:Tahoma;text-align:center">
-
+    <form id="form1" runat="server">
         <div style="float: left; width: 70%;">
 
 
               <div class="panel panel-primary">
               <div class="panel-heading">Dictionary</div>
-                   <div class="jumbotron">
+                   <div class="jumbotron">                
                     <div class="panel-body">
-                    <form id="form1" runat="server">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">Upload Your File here</div>
-                            <div class="panel-body">
-                                <div>    
-                                <asp:FileUpload ID="FileUpload1" runat="server" />
-                                <br />
-                                <asp:Button ID="Button1" runat="server" Text="Upload" OnClick="Button1_Click" />
-                                </div>
-                            </div>
-                            </div>
-
                                     <table align="center">
                                         <tr>
                                             <td>
@@ -66,27 +54,21 @@
                                              </td>
                                              </tr>
                                     </table>
-                             </form>
+                            
              </div>
              </div>  
+             </div>
             </div>
-
-
-
-
-        
-
-        </div>
         <div style="float: right; width: 30%;" >
             <div class="panel panel-primary">
               <div class="panel-heading">Dictionary</div>
               <div class="panel-body">
-                Get the selected Value here
+                Get the selected Value here and Give the meaning and usage of the value
               </div>
             </div>
         </div>
 
 
- 
+  </form>
 </body>
 </html>
