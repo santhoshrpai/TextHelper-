@@ -26,25 +26,38 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (this.FileUpload1.HasFile)
+        try
         {
-            PdfReader reader1 = (PdfReader)Session["document"];
-            string fileName = Server.MapPath(FileUpload1.FileName);
-            if (File.Exists(fileName))
+            if (this.FileUpload1.HasFile)
             {
-                File.Delete(fileName);
+                PdfReader reader1 = (PdfReader)Session["document"];
+                string fileName = Server.MapPath(FileUpload1.FileName);
+                if (File.Exists(fileName))
+                {
+                    File.Delete(fileName);
+                }
+                FileUpload1.SaveAs(fileName);
+
+                string text = ExtractTextFromPdf(fileName);
+                reader = new PdfReader(fileName);
+                //Session["file"] = fileName;
+                Session["document"] = reader;
+                Session["noOfPages"] = reader.NumberOfPages.ToString();
+                SetContent();
+                result.Style.Add("visibility", "visible");
+                result.Style.Add("overflow", "scroll");
+                pnlShowPage.Visible = true;
+                result.InnerText = "";
+                //reader.Close();
             }
-            FileUpload1.SaveAs(fileName);
-            string text = ExtractTextFromPdf(fileName);
-            reader = new PdfReader(fileName);
-            //Session["file"] = fileName;
-            Session["document"] = reader;
-            Session["noOfPages"] = reader.NumberOfPages.ToString();
-            SetContent();
-            result.Style.Add("visibility", "visible");
-            result.Style.Add("overflow", "scroll");
-            pnlShowPage.Visible = true;
-            //reader.Close();
+        }
+        catch (IOException exception)
+        {
+            Console.WriteLine(
+                "{0}: The write operation could not " +
+                "be performed because the specified " +
+                "part of the file is locked.",
+                exception.GetType().Name);
         }
     }
 
@@ -52,7 +65,6 @@ public partial class _Default : System.Web.UI.Page
     {
         PdfReader reader = new PdfReader(path);
         string txt = PdfTextExtractor.GetTextFromPage(reader, 1, new LocationTextExtractionStrategy());
-        reader.Close();
         return txt;
     }
 

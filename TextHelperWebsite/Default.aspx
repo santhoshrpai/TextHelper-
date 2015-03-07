@@ -8,7 +8,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>
     $(function () {
-        $(document.body).bind('mouseup', function (e) {
+        $("#result").bind('mouseup', function (e) {
             var selection;
 
             if (window.getSelection) {
@@ -33,7 +33,7 @@
         <tr>
             <td>
      <!-- This div displays the content of the document -->
-    <div id="result" runat="server" style="text-align:left;border-color:black;border-style:outset;border-width:thin;height:680px;vertical-align:central;visibility:hidden">
+    <div id="result" runat="server" style="text-align:left;border-color:black;border-style:outset;border-width:thin;height:680px;width:680px;vertical-align:central;visibility:hidden">
     </div> <br />
     <asp:Panel runat="server" ID="pnlShowPage" Visible="false" HorizontalAlign="Center">
     <asp:Button ID="btnFirst" runat="server" Text="<<- First" OnClick="btnFirst_Click" /> &nbsp;
