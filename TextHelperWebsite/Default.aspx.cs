@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using iTextSharp.text.pdf.parser;
 using iTextSharp.text.pdf;
+using System.IO;
 
 public partial class _Default : System.Web.UI.Page
 {
@@ -19,12 +20,40 @@ public partial class _Default : System.Web.UI.Page
         if (!IsPostBack)
         {
             //load data from pdf file.
-            reader = new PdfReader(Server.MapPath("SamplePDFs/Oliver-Twist.pdf"));
+            
+        }
+    }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        if (this.FileUpload1.HasFile)
+        {
+            PdfReader reader1 = (PdfReader)Session["document"];
+            string fileName = Server.MapPath(FileUpload1.FileName);
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
+            FileUpload1.SaveAs(fileName);
+            string text = ExtractTextFromPdf(fileName);
+            reader = new PdfReader(fileName);
+            //Session["file"] = fileName;
             Session["document"] = reader;
             Session["noOfPages"] = reader.NumberOfPages.ToString();
             SetContent();
+            result.Style.Add("visibility", "visible");
+            result.Style.Add("overflow", "scroll");
             pnlShowPage.Visible = true;
+            //reader.Close();
         }
+    }
+
+    protected string ExtractTextFromPdf(string path)
+    {
+        PdfReader reader = new PdfReader(path);
+        string txt = PdfTextExtractor.GetTextFromPage(reader, 1, new LocationTextExtractionStrategy());
+        reader.Close();
+        return txt;
     }
 
     private void SetContent()
